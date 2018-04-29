@@ -68,8 +68,8 @@ rD <- rsDriver(port = 4444L,  browser = "chrome")
 remDr <- rD[["client"]]
 remDr$navigate("https://projects.fivethirtyeight.com/carmelo/kyrie-irving/")
 
-elem <- remDr$findElement(using="css selector", value=".desc")
-elemtxt <- elem$getElementAttribute("div")
+elem <- remDr$findElement(using="css selector", value=".market-value")
+elemtxt <- elem$getElementText()
 
 
 
