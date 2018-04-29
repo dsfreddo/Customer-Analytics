@@ -1,3 +1,14 @@
+library(tidyverse)
+library(fivethirtyeight)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(magrittr)
+library(broom)
+library(stringr)
+library(ggthemes)
+library(scales)
+
 #Inspecting the dataset
 
 bechdel
@@ -33,7 +44,10 @@ ggplot(data = bechdel, aes(year)) +
   labs(y = "Percentage Pass/Fail", x = "Year(every 5 years)", subtitle = "How women are represented in movies", caption = "Source: FiveThirtyEight Bechdel Dataset") +
   geom_segment(data = dat, aes(x = x, y = y, xend = x2, yend = y2), size = 2) +
   scale_color_manual(values = "Black") +
-  guides(color = FALSE, size = FALSE)
+  guides(color = FALSE, size = FALSE) +
+  annotate("text", x = 1994, y = .2, label = "Pass", size = 20) +
+  annotate("text", x = 1994, y = .75, label = "Fail", size = 20)
+?annotate
 
 #Filtered and calculated median budget in 2013$ and then plotted that info on a horizontal bar plot.
 
@@ -54,7 +68,19 @@ bechdel %>%
         axis.text.y = element_text(size = 14)) +
   labs(y = "", x = "", subtitle = "2013 dollars")
   
-  
+#Question 3
+
+bechdel %>% 
+  filter(binary == "PASS") %>% 
+  arrange(-domgross)
+
+#Question 4
+
+bechdel %>%
+  filter(binary == "PASS") %>% 
+  count()
+
+
 ###########################################################################
 
 #Ignore below, just some random functions and help files
